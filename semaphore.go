@@ -9,7 +9,7 @@ type semaphore struct {
 	semaphoreCount chan  struct{}
 }
 
-func  NewSemaphore(permits int) Semaphore {
+func  NewSemaphore(permits int) *semaphore {
 	return &semaphore{semaphoreCount: make(chan struct{}, permits)}
 }
 
