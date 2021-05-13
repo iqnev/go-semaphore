@@ -18,10 +18,10 @@ func main() {
 	for i := 1; i <= proccess; i++ {
 		semaphore.Acquire()
 
-		go func(v int) {
+		go func(p int) {
 			defer semaphore.Release()
-			longRunningProcess(v)
-			if v == proccess {
+			runningProcess(p)
+			if p == proccess {
 				doneS <- true
 			}
 		}(i)
@@ -30,7 +30,7 @@ func main() {
 	<-doneS
 }
 
-func longRunningProcess(ID int) {
+func runningProcess(ID int) {
 	fmt.Println(time.Now().Format("15:04:05.000"), "Running task with ID", ID)
 	time.Sleep(5 * time.Second)
 }
